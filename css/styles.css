@@ -624,3 +624,13 @@ textarea:focus {
   font-size: 0.85rem;
   color: var(--text-muted);
 }
+/* Sort dropdown in the project controls */
+.project-controls select {
+  padding: 0.5rem 0.9rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--bg-alt);
+  color: var(--text);
+  font: inherit;
+  cursor: pointer;
+}

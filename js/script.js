@@ -116,16 +116,37 @@ function setupContactForm() {
 function isValidEmail(value) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 }
-// ---- Project filter + live search ----
+// ---- Project filter + live search + sort ----
 function setupProjectFilter() {
   const cards = document.querySelectorAll('.project-card');
   const buttons = document.querySelectorAll('.filter-btn');
   const search = document.getElementById('projectSearch');
   const count = document.getElementById('resultsCount');
   const empty = document.getElementById('emptyState');
+  const sortSelect = document.getElementById('projectSort'); // get each by the idea which will differentiate and order them when we get to sorting
+  const grid = document.querySelector('.project-grid');
   let activeFilter = 'all';
 
+  // compare the cards based on the selected sort order and rearrange them in the grid, if same date then sort by name
+  function sortCards() {
+    const order = sortSelect.value;
+    const sorted = [...cards].sort((a, b) => {
+      const nameA = a.querySelector('h3').textContent;
+      const nameB = b.querySelector('h3').textContent;
+
+      if (order === 'az') return nameA.localeCompare(nameB);
+
+      const byDate = order === 'newest'
+        ? b.dataset.date.localeCompare(a.dataset.date)
+        : a.dataset.date.localeCompare(b.dataset.date);
+
+      return byDate !== 0 ? byDate : nameA.localeCompare(nameB);
+    });
+    sorted.forEach((card) => grid.appendChild(card));
+  }
+
   function apply() {
+    sortCards(); // apply sorting before filtering and searching
     const query = search.value.trim().toLowerCase();
     let visible = 0;
     cards.forEach((card) => {
@@ -147,6 +168,7 @@ function setupProjectFilter() {
     apply();
   }));
   search.addEventListener('input', apply);
+  sortSelect.addEventListener('change', apply); // this will trigger the sorting when the user changes the sort order
   apply();
 }
 // ---- Read more / Show less ----

@@ -70,6 +70,11 @@
         <button type="button" class="filter-btn" data-filter="design">Design</button>
         <button type="button" class="filter-btn" data-filter="management">Management</button>
         <input type="search" id="projectSearch" placeholder="Search projects…" aria-label="Search projects" />
+        <select id="projectSort" aria-label="Sort projects">
+  <option value="newest">Newest first</option>
+  <option value="oldest">Oldest first</option>
+  <option value="az">Name (A–Z)</option>
+</select>
       </div>
       <p id="resultsCount" aria-live="polite"></p>
       <p id="emptyState" hidden>No projects match. Try a different keyword or clear the search.</p>
