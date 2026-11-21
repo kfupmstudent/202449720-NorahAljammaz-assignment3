@@ -28,15 +28,15 @@ document.addEventListener('DOMContentLoaded', () => {
   setupMobileNav();
   setupThemeToggle();
   setGreetingByTime();
-    setupVisitorName();
-      setupVisitorType();
+  setupVisitorName();
+  setupVisitorType();
   setupContactForm();
   setupProjectFilter();
   setupReadMore();
   loadRepos();
   setupScrollReveal();
-    setupVisitTimer();
-    
+  setupVisitTimer();
+
 });
 
 // ---- Footer year -----------------------------------------
@@ -307,7 +307,7 @@ function setupVisitorName() {
     saved.hidden = !name;
     if (name) savedName.textContent = name;
     setGreetingByTime();
-        showVisitorMessage();
+    showVisitorMessage();
 
     const contactName = document.getElementById('name');
     if (name && contactName && !contactName.value) contactName.value = name;

@@ -215,7 +215,7 @@ ul {
 }
 
 .hero-image img {
-    height: auto;
+  height: auto;
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   aspect-ratio: 1 / 1;
@@ -619,12 +619,14 @@ textarea:focus {
     animation: none;
   }
 }
+
 /* Date, course and status line on each project card */
 .project-meta {
   margin: 0 0 0.6rem;
   font-size: 0.85rem;
   color: var(--text-muted);
 }
+
 /* Sort dropdown in the project controls */
 .project-controls select {
   padding: 0.5rem 0.9rem;
@@ -635,12 +637,14 @@ textarea:focus {
   font: inherit;
   cursor: pointer;
 }
+
 /* Time-on-site timer in the footer */
 .visit-timer {
   margin-top: 0.3rem;
   font-size: 0.85rem;
   font-variant-numeric: tabular-nums;
 }
+
 /* Visitor panel in the hero (saved name and visitor type) */
 .visitor-panel {
   margin-top: 2rem;
@@ -684,6 +688,7 @@ textarea:focus {
   font-weight: 600;
   cursor: pointer;
 }
+
 .visitor-type {
   display: flex;
   flex-direction: column;
