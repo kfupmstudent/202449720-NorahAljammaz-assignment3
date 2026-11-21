@@ -12,9 +12,9 @@ document.addEventListener('DOMContentLoaded', () => {
   setGreetingByTime();
   setupContactForm();
   setupProjectFilter();
-    setupReadMore();
-      loadRepos();
-       setupScrollReveal(); 
+  setupReadMore();
+  loadRepos();
+  setupScrollReveal();
 });
 
 // ---- Footer year -----------------------------------------
