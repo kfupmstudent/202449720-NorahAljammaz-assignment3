@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setupReadMore();
   loadRepos();
   setupScrollReveal();
+    setupVisitTimer();
 });
 
 // ---- Footer year -----------------------------------------
@@ -240,4 +241,28 @@ function setupScrollReveal() {
     el.classList.add('reveal');
     observer.observe(el);
   });
+}
+// ---- Time-on-site timer ----
+// This will display the time the user has spent on the site in the footer, 
+// setInterval runs the code every 1000 ms (one second). 
+// document.hidden is true while you're on another tab, so the timer pauses there. padStart(2, '0') turns 5 into 05, so the time reads 1:05 and not 1:5.
+function setupVisitTimer() {
+  const display = document.getElementById('visitTime');
+  if (!display) return;
+
+  let seconds = 0;
+  setInterval(() => {
+    if (document.hidden) return;
+    seconds++;
+    display.textContent = formatDuration(seconds);
+  }, 1000);
+}
+
+function formatDuration(totalSeconds) {
+  const hours = Math.floor(totalSeconds / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  const seconds = String(totalSeconds % 60).padStart(2, '0');
+
+  if (hours > 0) return `${hours}:${String(minutes).padStart(2, '0')}:${seconds}`;
+  return `${minutes}:${seconds}`;
 }

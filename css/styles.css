@@ -634,3 +634,9 @@ textarea:focus {
   font: inherit;
   cursor: pointer;
 }
+/* Time-on-site timer in the footer */
+.visit-timer {
+  margin-top: 0.3rem;
+  font-size: 0.85rem;
+  font-variant-numeric: tabular-nums;
+}
