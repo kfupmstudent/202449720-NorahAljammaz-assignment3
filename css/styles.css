@@ -640,3 +640,46 @@ textarea:focus {
   font-size: 0.85rem;
   font-variant-numeric: tabular-nums;
 }
+/* Visitor panel in the hero (saved name and visitor type) */
+.visitor-panel {
+  margin-top: 2rem;
+  padding: 1.2rem 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  text-align: left;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.name-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.name-row {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.name-row input {
+  flex: 1;
+  min-width: 0;
+}
+
+.name-saved {
+  margin: 0;
+}
+
+.text-btn {
+  padding: 0;
+  margin-left: 0.4rem;
+  background: none;
+  border: none;
+  color: var(--accent);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}

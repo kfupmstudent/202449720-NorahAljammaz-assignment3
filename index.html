@@ -53,6 +53,22 @@
           <a href="#projects" class="btn btn-primary">See my work</a>
           <a href="#contact" class="btn btn-outline">Get in touch</a>
         </div>
+                <!-- Visitor panel: saved name and visitor type -->
+        <div class="visitor-panel">
+          <form id="nameForm" class="name-form" novalidate>
+            <label for="visitorName">What should I call you?</label>
+            <div class="name-row">
+              <input type="text" id="visitorName" maxlength="30" placeholder="Your first name"
+                autocomplete="given-name" />
+              <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+            <span class="field-error" id="visitorNameError"></span>
+          </form>
+          <p class="name-saved" id="nameSaved" hidden>
+            Nice to see you, <strong id="savedName"></strong>!
+            <button type="button" class="text-btn" id="forgetName">Not you?</button>
+          </p>
+        </div>
       </div>
       <div class="hero-image">
 

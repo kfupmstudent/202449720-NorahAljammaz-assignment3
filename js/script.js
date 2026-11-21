@@ -10,12 +10,14 @@ document.addEventListener('DOMContentLoaded', () => {
   setupMobileNav();
   setupThemeToggle();
   setGreetingByTime();
+    setupVisitorName();
   setupContactForm();
   setupProjectFilter();
   setupReadMore();
   loadRepos();
   setupScrollReveal();
     setupVisitTimer();
+    
 });
 
 // ---- Footer year -----------------------------------------
@@ -64,17 +66,17 @@ function setupThemeToggle() {
   });
 }
 
-// ---- Greeting based on time of day -------------------------
 function setGreetingByTime() {
   const el = document.getElementById('greeting');
   if (!el) return;
 
   const hour = new Date().getHours();
-  let greeting = 'Good evening, welcome';
-  if (hour < 12) greeting = 'Good morning, welcome';
-  else if (hour < 18) greeting = 'Good afternoon, welcome';
+  let greeting = 'Good evening';
+  if (hour < 12) greeting = 'Good morning';
+  else if (hour < 18) greeting = 'Good afternoon';
 
-  el.textContent = greeting;
+  const name = localStorage.getItem('visitorName');
+  el.textContent = name ? `${greeting}, ${name}` : `${greeting}, welcome`;
 }
 
 // ---- Contact form (front-end only, no backend) --------------
@@ -265,4 +267,52 @@ function formatDuration(totalSeconds) {
 
   if (hours > 0) return `${hours}:${String(minutes).padStart(2, '0')}:${seconds}`;
   return `${minutes}:${seconds}`;
+}
+
+// ---- Visitor name (saved in localStorage) ----
+// this saves the visitor's name in localStorage and displays it in the greeting, 
+// also pre-fills the contact form name field if it's empty
+// it is used ny setgrreetingByTime() to display the name in the greeting
+function setupVisitorName() {
+  const form = document.getElementById('nameForm');
+  const input = document.getElementById('visitorName');
+  const error = document.getElementById('visitorNameError');
+  const saved = document.getElementById('nameSaved');
+  const savedName = document.getElementById('savedName');
+  const forget = document.getElementById('forgetName');
+  if (!form) return;
+
+  function render() {
+    const name = localStorage.getItem('visitorName');
+    form.hidden = Boolean(name);
+    saved.hidden = !name;
+    if (name) savedName.textContent = name;
+    setGreetingByTime();
+
+    const contactName = document.getElementById('name');
+    if (name && contactName && !contactName.value) contactName.value = name;
+  }
+
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const name = input.value.trim();
+
+    if (!/^[\p{L}][\p{L} '-]{1,29}$/u.test(name)) {
+      error.textContent = 'Please enter a name of 2 to 30 letters.';
+      return;
+    }
+
+    error.textContent = '';
+    localStorage.setItem('visitorName', name);
+    form.reset();
+    render();
+  });
+
+  forget.addEventListener('click', () => {
+    localStorage.removeItem('visitorName');
+    render();
+    input.focus();
+  });
+
+  render();
 }
