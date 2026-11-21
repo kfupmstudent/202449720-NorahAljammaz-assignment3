@@ -68,6 +68,21 @@
             Nice to see you, <strong id="savedName"></strong>!
             <button type="button" class="text-btn" id="forgetName">Not you?</button>
           </p>
+
+          <!-- Visitor type: shows a different message for each choice -->
+          <div class="visitor-type">
+            <label for="visitorType">What brings you here?</label>
+            <select id="visitorType">
+              <option value="">Choose one…</option>
+              <option value="recruiter">I'm hiring</option>
+              <option value="student">I'm a student</option>
+              <option value="curious">Just looking around</option>
+            </select>
+          </div>
+          <div class="visitor-message" id="visitorMessage" hidden>
+            <p id="visitorMessageText"></p>
+            <a href="#projects" class="link" id="visitorMessageLink"></a>
+          </div>
         </div>
       </div>
       <div class="hero-image">

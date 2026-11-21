@@ -5,12 +5,31 @@
 // validation feedback (no backend — front-end only).
 // =========================================================
 const GITHUB_USERNAME = 'kfupmstudent';
+// Message, link text and action shown for each "What brings you here?" choice
+const VISITOR_MESSAGES = {
+  recruiter: {
+    text: 'Short on time? Rawi shows my hands-on web development, and Darsi shows the business side of my work.',
+    linkText: 'Show my web project',
+    filter: 'web',
+  },
+  student: {
+    text: 'These are class projects from SWE 216, 363 and 387. Filter them by type, or open my GitHub repos to see the code.',
+    linkText: 'Show all projects',
+    filter: 'all',
+  },
+  curious: {
+    text: 'Have a look around: switch to dark mode at the top, filter the projects, or leave me a message.',
+    linkText: 'Send me a message',
+    href: '#contact',
+  },
+};
 document.addEventListener('DOMContentLoaded', () => {
   setFooterYear();
   setupMobileNav();
   setupThemeToggle();
   setGreetingByTime();
     setupVisitorName();
+      setupVisitorType();
   setupContactForm();
   setupProjectFilter();
   setupReadMore();
@@ -288,6 +307,7 @@ function setupVisitorName() {
     saved.hidden = !name;
     if (name) savedName.textContent = name;
     setGreetingByTime();
+        showVisitorMessage();
 
     const contactName = document.getElementById('name');
     if (name && contactName && !contactName.value) contactName.value = name;
@@ -315,4 +335,55 @@ function setupVisitorName() {
   });
 
   render();
+}
+// ---- Visitor type: different message for each choice ----
+// VISITOR_MESSAGES is a lookup table. The dropdown value selects the matching entry.
+// If no option is selected, the message box remains hidden.
+// If a name is saved, it is added to the beginning of the message.
+// If an entry has a filter, clicking its link also activates that filter button.
+// For example, the "I'm hiring" link opens the projects section with "Web" selected.
+function setupVisitorType() {
+  const select = document.getElementById('visitorType');
+  const link = document.getElementById('visitorMessageLink');
+  if (!select || !link) return;
+
+  const saved = localStorage.getItem('visitorType');
+  if (saved && VISITOR_MESSAGES[saved]) select.value = saved;
+
+  select.addEventListener('change', () => {
+    if (select.value) localStorage.setItem('visitorType', select.value);
+    else localStorage.removeItem('visitorType');
+    showVisitorMessage();
+  });
+
+  link.addEventListener('click', () => {
+    const message = VISITOR_MESSAGES[select.value];
+    if (message && message.filter) {
+      document.querySelector(`.filter-btn[data-filter="${message.filter}"]`).click();
+    }
+  });
+
+  showVisitorMessage();
+}
+
+function showVisitorMessage() {
+  const select = document.getElementById('visitorType');
+  const box = document.getElementById('visitorMessage');
+  const text = document.getElementById('visitorMessageText');
+  const link = document.getElementById('visitorMessageLink');
+  if (!select || !box) return;
+
+  const message = VISITOR_MESSAGES[select.value];
+  if (!message) {
+    box.hidden = true;
+    return;
+  }
+
+  const name = localStorage.getItem('visitorName');
+  text.textContent = name
+    ? `${name}, ${message.text.charAt(0).toLowerCase()}${message.text.slice(1)}`
+    : message.text;
+  link.textContent = message.linkText;
+  link.href = message.href || '#projects';
+  box.hidden = false;
 }
