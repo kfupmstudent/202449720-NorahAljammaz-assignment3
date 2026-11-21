@@ -215,6 +215,7 @@ ul {
 }
 
 .hero-image img {
+    height: auto;
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   aspect-ratio: 1 / 1;
