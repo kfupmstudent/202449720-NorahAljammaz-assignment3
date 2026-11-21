@@ -145,7 +145,7 @@ function setupProjectFilter() {
   const search = document.getElementById('projectSearch');
   const count = document.getElementById('resultsCount');
   const empty = document.getElementById('emptyState');
-  const sortSelect = document.getElementById('projectSort'); // get each by the idea which will differentiate and order them when we get to sorting
+  const sortSelect = document.getElementById('projectSort'); // get each by the id which will differentiate and order them when we get to sorting
   const grid = document.querySelector('.project-grid');
   let activeFilter = 'all';
 
@@ -291,7 +291,7 @@ function formatDuration(totalSeconds) {
 // ---- Visitor name (saved in localStorage) ----
 // this saves the visitor's name in localStorage and displays it in the greeting, 
 // also pre-fills the contact form name field if it's empty
-// it is used ny setgrreetingByTime() to display the name in the greeting
+// it is used the setgrreetingByTime() to display the name in the greeting
 function setupVisitorName() {
   const form = document.getElementById('nameForm');
   const input = document.getElementById('visitorName');
